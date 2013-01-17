@@ -1,0 +1,79 @@
+/* 
+  Localizable.strings
+  caseshop
+
+  Created by Yongnam Park on 12. 11. 20..
+  Copyright (c) 2012년 CultStory Inc. All rights reserved.
+*/
+
+
+"Cart is Empty :p" = "장바구니가 비어있습니다 :p";
+
+"OKAY" = "확인";
+
+"Please wait until calculating shipping cost is complete." = "배송비 계산이 완료될때 까지 기다려주세요 :)";
+
+"CLOSE" = "닫기";
+
+"DONE" = "완료";
+
+"CHECKOUT" = "주문하기";
+
+"SHIP TO:%@" = "배송국가:%@";
+
+"YOUR ORDERS" = "주문내역";
+
+"NOTICE" = "공지사항";
+
+"LEGAL" = "정책 및 방침";
+
+"CONTACT" = "문의하기";
+
+"ORDER DETAIL" = "주문내역";
+
+"YOUR ORDERS" = "주문목록";
+
+"Temporarily out of stock" = "일시품절입니다";
+
+"The product is already in cart. Would you like to add one more item?" = "상품이 이미 장바구니 안에 있습니다. 하나를 더하시겠습니까?";
+
+"No, Thanks" = "아니오";
+
+"ADD ONE MORE" = "더하기";
+
+"Successfully added to cart. Do you want to go cart?" = "상품을 장바구니에 담았습니다. 장바구니로 가시겠습니까?";
+
+"GO TO CART" = "장바구니로가기";
+
+"SHIPPING COUNTRY" = "배송국가 선택";
+
+"[CASEBUY.ME]CONTACT FOR ASKING" = "[CASEBUY.ME] 문의";
+
+"Sent from CASEBUY iPhone App" = "CASEBUY 아이폰앱에서 보내어짐";
+
+"[CASEBUY.ME]CONTACT FOR ORDER" = "[CASEBUY.ME]주문 관련 문의";
+
+"Order NO:" = "주문 번호:";
+
+"RELATED CASES" = "관련 케이스 상품";
+
+"No related wallpaper exist. :(" = "관련 배경화면이 없습니다";
+
+"Sorry! We're preparing products :)" = "상품을 준비 중입니다 :)";
+
+"No record of order founded :)" = "주문하신 내역이 없습니다 :)";
+
+"There is something you should know. Would you like to check it out?" = "새로운 알림이 있습니다.\n확인해보시겠습니까?";
+
+"Check it out" = "네, 보여주세요";
+
+"PINCH ZOOM" = "확대해보세요!";
+
+"SLIDE PAGE" = "쓸어 넘겨보세요!";
+
+"more items below" = "개의 아이템이 아래에 더 있어요!";
+
+
+"ADD TO CART WITH OPTION" = "옵션선택 후 장바구니에 담기";
+
+"ADD TO CART" = "장바구니에 담기";
