@@ -12,7 +12,9 @@
 #import "DeviceSelectController.h"
 
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate,UIAlertViewDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,UIAlertViewDelegate>{
+    float _originBriteness;
+}
 
 @property (strong, nonatomic) UIWindow *window;
 

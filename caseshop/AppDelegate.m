@@ -21,7 +21,6 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
-static float _originBriteness;
 
 +(AppDelegate*)sharedAppdelegate
 {
@@ -318,13 +317,16 @@ static float _originBriteness;
 #pragma mark - Brightness
 
 - (void)setBrightness{
-    _originBriteness = [[UIScreen mainScreen] brightness];
-    if (_originBriteness < .7){
+    float originBriteness = [[UIScreen mainScreen] brightness];
+    if (originBriteness < .7){
         [[UIScreen mainScreen] setBrightness:.7];
+        _originBriteness = originBriteness;
     }
 }
 
 - (void)restoreBrightness{
-    [[UIScreen mainScreen] setBrightness:_originBriteness];
+    if (_originBriteness <= 0.7){
+        [[UIScreen mainScreen] setBrightness:_originBriteness];
+    }
 }
 @end
