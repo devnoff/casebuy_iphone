@@ -48,6 +48,8 @@ typedef enum {
     
     
     CGPoint _lastPos;
+    
+    NSString *sortBy;
 }
 
 @property (nonatomic, getter = tableView) UITableView *tableView;

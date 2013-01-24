@@ -74,10 +74,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ShopViewController *parent = (ShopViewController*)parentController;
-    [parent.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+//    [parent.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
     
     // 애니메이션 후 로드
-    [self performSelector:@selector(openDetailViewWithIndex:) withObject:[NSNumber numberWithInteger:indexPath.row] afterDelay:.3];
+    [self performSelector:@selector(openDetailViewWithIndex:) withObject:[NSNumber numberWithInteger:indexPath.row] afterDelay:.0];
 }
 
 - (void)openDetailViewWithIndex:(NSNumber*)index{

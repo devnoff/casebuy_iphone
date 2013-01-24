@@ -12,6 +12,10 @@
 #import "AppDelegate.h"
 #import "Flurry.h"
 #import "ToastController.h"
+#import "ColorButton.h"
+
+#define SUBTAB_BTN_LEFT 1000
+#define SUBTAB_BTN_RIGHT 1001
 
 @interface ShopViewController ()
 
@@ -46,6 +50,7 @@
     _tableView = nil;
     _activity = nil;
     footerView = nil;
+    sortBy = nil;
 }
 
 - (UITableView*)tableView{
@@ -62,6 +67,15 @@
                          _tableView.alpha = 1.0f;
                      }];
 }
+
+- (void)animateHideTableHeader{
+    
+    [UIView animateWithDuration:.3
+                     animations:^{
+                         _tableView.contentOffset = CGPointMake(0, 50);
+                     }];
+}
+
 
 
 #pragma mark - Footer Loading
@@ -215,7 +229,22 @@
 
 #pragma mark - Button Actions
 
-
+- (void)subTabButtonTapped:(id)sender{
+    UIButton *btn = (UIButton*)sender;
+    [btn setSelected:YES];
+    
+    // 선택 상태 변경
+    if (btn.tag == SUBTAB_BTN_LEFT){
+        sortBy = @"";
+        [(UIButton*)[_tableView.tableHeaderView viewWithTag:SUBTAB_BTN_RIGHT] setSelected:NO];
+    } else {
+        sortBy = @"sales_volume";
+        [(UIButton*)[_tableView.tableHeaderView viewWithTag:SUBTAB_BTN_LEFT] setSelected:NO];
+    }
+    
+    // 데이터 불러오기
+    [self refresh];
+}
 
 
 #pragma mark - Data
@@ -295,13 +324,17 @@
     
     API *apiRequest = [[API alloc] init];
     
-    [apiRequest get:[NSString stringWithFormat:@"s/categoryProducts?categories_id=%d&offset=%d",categoryId,_listData.count]
+    [apiRequest get:[NSString stringWithFormat:@"s/categoryProducts?categories_id=%d&offset=%d&sort_order=%@",categoryId,_listData.count,sortBy]
        successBlock:^(NSDictionary *result){
            NSLog(@"loadCategoryProducts: %@", result);
            int resultCode = [[result objectForKey:@"code"] intValue];
            if (resultCode == kAPI_RESULT_OK){
 
                BOOL flashScroll = _listData.count > 0;
+               
+               if (0 == _listData.count){
+                   [self animateHideTableHeader];
+               }
                
                [_listData addObjectsFromArray:[result objectForKey:@"result"]];
                [_tableView reloadData];
@@ -315,7 +348,9 @@
 //                   int count = [[result objectForKey:@"result"] count];
                    
                    [self animateHideFooter];
+                   
                }
+               
                
                loadingData = NO;
            }
@@ -441,16 +476,49 @@
 - (void)locateNavigationButtons{
      
     if (dispType == ShopDispTypeCategoryTile){
-        [self setLeftButtonType:LeftButtonTypeDevice];
+//        [self setLeftButtonType:LeftButtonTypeDevice];
         self.navigationItem.rightBarButtonItem = nil;
         
     } else if (dispType == ShopDispTypeCategoryProductsList){
-        [self setLeftButtonType:LeftButtonTypeDevice];
+//        [self setLeftButtonType:LeftButtonTypeDevice];
         [self setRightButtonType:RightButtonTypeTile];
         
     } else {
         [self setRightButtonType:RightButtonTypeTile];
     }
+}
+
+- (void)initSubTabs {
+    UIColor *normalColor = [UIColor colorWithWhite:.5 alpha:1];
+    UIColor *selectedColor = [UIColor colorWithWhite:1 alpha:1];
+    UIColor *highlightColor = [UIColor blackColor];
+    UIColor *selectedTextColor = [UIColor colorWithWhite:.5 alpha:1];
+    
+    ColorButton *btnLeft = [[ColorButton alloc] initWithFrame:CGRectMake(0, 0, 160, 50)];
+    btnLeft.colorNormal = normalColor;
+    btnLeft.colorSelected = selectedColor;
+    btnLeft.selected = YES;
+    btnLeft.tag = SUBTAB_BTN_LEFT;
+    [btnLeft setTitle:NSLocalizedString(@"Date Release", nil) forState:UIControlStateNormal];
+    [btnLeft addTarget:self action:@selector(subTabButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [btnLeft setTitleColor:selectedTextColor forState:UIControlStateSelected];
+    btnLeft.colorHighlighted = highlightColor;
+    [btnLeft.titleLabel setFont:[UIFont fontWithName:@"DINPro-Bold" size:15]];
+    [_tableView.tableHeaderView addSubview:btnLeft];
+    
+    ColorButton *btnRight = [[ColorButton alloc] initWithFrame:CGRectMake(160, 0, 160, 50)];
+    btnRight.colorNormal = normalColor;
+    btnRight.colorSelected = selectedColor;
+    btnRight.selected = NO;
+    btnRight.tag = SUBTAB_BTN_RIGHT;
+    [btnRight setTitle:NSLocalizedString(@"Best Seller", nil) forState:UIControlStateNormal];
+    [btnRight addTarget:self action:@selector(subTabButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [btnRight setTitleColor:selectedTextColor forState:UIControlStateSelected];
+    btnRight.colorHighlighted = highlightColor;
+    [btnRight.titleLabel setFont:[UIFont fontWithName:@"DINPro-Bold" size:15]];
+    [_tableView.tableHeaderView addSubview:btnRight];
+    
+    
 }
 
 #pragma mark - View Life Cycle
@@ -540,6 +608,9 @@
 
     [self.navigationController.navigationBar addGestureRecognizer:tap];
     
+    
+    //
+    [self initSubTabs];
     
     
 }

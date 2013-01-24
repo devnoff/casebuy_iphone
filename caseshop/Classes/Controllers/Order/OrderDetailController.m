@@ -9,6 +9,7 @@
 #import "OrderDetailController.h"
 #import "MailController.h"
 
+
 @interface OrderDetailController ()
 
 @end
@@ -86,8 +87,27 @@
 
 #pragma mark - UIWebViewDelegate
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
-    NSLog(@"%@",request.URL.absoluteString);
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)req navigationType:(UIWebViewNavigationType)navigationType{
+
+    NSMutableURLRequest *request = (NSMutableURLRequest *)req;
+    
+    NSString *url = [[request URL] absoluteString];
+    NSLog(@"url : %@",url);
+    NSArray *comp = [url componentsSeparatedByString:@"#"];
+    if (comp.count < 2)
+        return YES;
+    
+    if ([[comp objectAtIndex:1] isEqualToString:@"cancelRequestDone"]){
+        [self.navigationController popViewControllerAnimated:YES];
+        return NO;
+    }
+    
+    else if ([[comp objectAtIndex:1] isEqualToString:@"openInSafari"]){
+        NSString *url = [comp objectAtIndex:0];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+        return NO;
+    }
+
     return YES;
 }
 
@@ -102,6 +122,8 @@
                          _webView.alpha = 1.0f;
                      }];
     
+    NSString *versionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleVersionKey];
+    [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"appVersion=%@;",versionString]];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{

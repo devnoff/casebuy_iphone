@@ -9,7 +9,7 @@
 #import "ColorButton.h"
 
 @implementation ColorButton
-@synthesize colorNormal,colorHighlighted;
+@synthesize colorNormal,colorHighlighted,colorSelected;
 
 
 - (id)initWithFrame:(CGRect)frame
@@ -74,6 +74,10 @@
 - (void)setHighlighted:(BOOL)highlighted{
     [super setHighlighted:highlighted];
     
+    if (self.colorSelected){
+        return;
+    }
+    
     if (!(_inset.height == 0 && _inset.width == 0)){
         [self setLabelInset:_inset];
     }
@@ -84,7 +88,16 @@
         self.backgroundColor = colorNormal;
     }
     
-    
+}
+
+
+- (void)setSelected:(BOOL)selected{
+    [super setSelected:selected];
+    if (selected){
+        self.backgroundColor = colorSelected;
+    } else {
+        self.backgroundColor = colorNormal;
+    }
 }
 
 - (void)setEnabled:(BOOL)enabled{

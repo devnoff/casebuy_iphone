@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ShopMainController.h"
 #import "ShopViewController.h"
-
 
 
 @interface MainViewController : UITabBarController{
     NSMutableArray *_controllers;
-    ShopViewController *_shopController;
+    ShopMainController *_shopController;
     
     UIButton *_badge;
 }

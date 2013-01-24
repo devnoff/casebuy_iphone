@@ -12,6 +12,7 @@
 #import "MoreViewController.h"
 #import "ProductCategoryController.h"
 #import "ProductListController.h"
+
 #import "API.h"
 #import "AppDelegate.h"
 
@@ -41,10 +42,16 @@
     
     _controllers = [[NSMutableArray alloc] init];
     
-    ShopViewController *shop = [[ShopViewController alloc] initWithNibName:@"ShopViewController" bundle:nil];
+//    ShopViewController *shop = [[ShopViewController alloc] initWithNibName:@"ShopViewController" bundle:nil];
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    NSInteger currCategory = [def integerForKey:kCURRENT_CATEGORY_ID];
+    
+    
+    ShopMainController *shop = [[ShopMainController alloc] initWithNibName:@"ShopMainController" bundle:nil];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:shop];
     
     _shopController = shop;
+    _shopController.categoryId = currCategory;
     
     UITabBarItem *tab1 = [[UITabBarItem alloc] init];
     [tab1 setFinishedSelectedImage:[UIImage imageNamed:@"Tab1_Selected"] withFinishedUnselectedImage:[UIImage imageNamed:@"Tab1"]];
@@ -235,22 +242,26 @@
 
 - (void)setShopType:(ShopType)type withCategoryId:(NSInteger)categoryId title:(NSString*)title{
     
+    
     _shopController.title = title;
     _shopController.navigationController.tabBarItem.title = @"";
     _shopController.categoryId = categoryId;
+    [_shopController performSelector:@selector(loadData)];
     
-    [_shopController clearData];
-    if (type==ShopTypeCategory){
-        _shopController.shopType = ShopTypeTile;
-        _shopController.dispType = ShopDispTypeCategoryTile;
-    } else {
-        _shopController.shopType = ShopTypeList;
-        _shopController.dispType = ShopDispTypeCategoryProductsList;
-    }
-    [_shopController locateNavigationButtons];
+    return;
     
-    if (_shopController.parentViewController)
-        [_shopController loadData];
+//    [_shopController clearData];
+//    if (type==ShopTypeCategory){
+//        _shopController.shopType = ShopTypeTile;
+//        _shopController.dispType = ShopDispTypeCategoryTile;
+//    } else {
+//        _shopController.shopType = ShopTypeList;
+//        _shopController.dispType = ShopDispTypeCategoryProductsList;
+//    }
+//    [_shopController locateNavigationButtons];
+//    
+//    if (_shopController.parentViewController)
+//        [_shopController loadData];
 }
 
 @end

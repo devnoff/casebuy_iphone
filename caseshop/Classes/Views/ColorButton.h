@@ -14,6 +14,7 @@
 
 @property (nonatomic,strong) UIColor *colorNormal;
 @property (nonatomic,strong) UIColor *colorHighlighted;
+@property (nonatomic,strong) UIColor *colorSelected;
 
 
 - (void)setLabelInset:(CGSize)inset;

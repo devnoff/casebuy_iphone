@@ -112,11 +112,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "caseshop/Classes/Controllers/MainViewController.m"
-         timestampString = "376977594.311358"
+         timestampString = "380722011.781074"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "241"
-         endingLineNumber = "241"
+         startingLineNumber = "252"
+         endingLineNumber = "252"
          landmarkName = "-setShopType:withCategoryId:title:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -125,11 +125,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "caseshop/Classes/Controllers/Shop/ShopViewController.m"
-         timestampString = "379997141.620427"
+         timestampString = "380537680.074866"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "125"
-         endingLineNumber = "125"
+         startingLineNumber = "139"
+         endingLineNumber = "139"
          landmarkName = "-list"
          landmarkType = "5">
       </FileBreakpoint>
@@ -138,11 +138,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "caseshop/Classes/Controllers/Shop/ShopViewController.m"
-         timestampString = "379997141.620427"
+         timestampString = "380537680.074866"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "148"
-         endingLineNumber = "148"
+         startingLineNumber = "162"
+         endingLineNumber = "162"
          landmarkName = "-tile"
          landmarkType = "5">
       </FileBreakpoint>
@@ -164,11 +164,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "caseshop/Classes/Controllers/Shop/ShopViewController.m"
-         timestampString = "379997141.620427"
+         timestampString = "380537680.074866"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "58"
-         endingLineNumber = "58"
+         startingLineNumber = "63"
+         endingLineNumber = "63"
          landmarkName = "-fadeInTableView"
          landmarkType = "5">
       </FileBreakpoint>
@@ -177,11 +177,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "caseshop/Classes/Controllers/Shop/ShopViewController.m"
-         timestampString = "379997141.620427"
+         timestampString = "380537680.074866"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "372"
-         endingLineNumber = "372"
+         startingLineNumber = "407"
+         endingLineNumber = "407"
          landmarkName = "-loadData"
          landmarkType = "5">
       </FileBreakpoint>
@@ -190,25 +190,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "caseshop/Classes/Controllers/Shop/ShopViewController.m"
-         timestampString = "379997141.620427"
+         timestampString = "380703543.77904"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "516"
-         endingLineNumber = "516"
+         startingLineNumber = "584"
+         endingLineNumber = "584"
          landmarkName = "-viewDidLoad"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "caseshop/Classes/Controllers/MainViewController.m"
-         timestampString = "377106428.954912"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "250"
-         endingLineNumber = "250"
-         landmarkName = "-setShopType:withCategoryId:title:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -281,13 +268,39 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "caseshop/Classes/Controllers/Shop/ShopViewController.m"
-         timestampString = "379997141.620427"
+         timestampString = "380537680.074866"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "345"
-         endingLineNumber = "345"
+         startingLineNumber = "380"
+         endingLineNumber = "380"
          landmarkName = "-loadCategories"
          landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "caseshop/Classes/Controllers/Shop/ShopViewController.m"
+         timestampString = "380537849.727755"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "325"
+         endingLineNumber = "325"
+         landmarkName = "-loadCategoryProducts"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "caseshop/Classes/Controllers/Shop/ShopViewController.h"
+         timestampString = "380712035.952357"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "45"
+         endingLineNumber = "45"
+         landmarkName = "@interface ShopViewController"
+         landmarkType = "2">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>
