@@ -7,8 +7,14 @@
 //
 
 #import "BaseViewController.h"
+#import "ProductListController.h"
+#import "ProductTileController.h"
 
 @interface ShopMainController : BaseViewController{
+    
+    IBOutlet UIScrollView *_scrollView;
+    IBOutlet UIActivityIndicatorView *_activity;
+    UITableView *_tableView;
 
     IBOutlet UIImageView *pop1;
     IBOutlet UIImageView *pop2;
@@ -30,6 +36,10 @@
     NSArray *_pops;
     NSArray *_news;
     NSArray *_bests;
+    
+    ProductTileController *_tileController;
+    ProductListController *_listController;
+    NSMutableArray *_listData;
     
     
 }
