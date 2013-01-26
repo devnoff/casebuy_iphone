@@ -9,6 +9,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <SDWebImage/SDWebImageDownloader.h>
 #import <SDWebImage/SDImageCache.h>
+#import <QuartzCore/QuartzCore.h>
 #import "ProductDetailController.h"
 #import "API.h"
 #import "CSImageCache.h"
@@ -21,6 +22,9 @@
 #import "CSLoader.h"
 #import "ZoomGuideController.h"
 #import "ColorButton.h"
+#import "FBNativeDialogs.h"
+#import "FacebookSDK.h"
+
 
 #define PRODUCT_DONT_HAVE_OPTION -1
 
@@ -39,6 +43,9 @@
     _descLabel = nil;
     _productOptions = nil;
     _movingViews = nil;
+    _fbActivity = nil;
+    _facebookBtn = nil;
+    _fbCntLabel = nil;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -50,7 +57,218 @@
     return self;
 }
 
+
+#pragma mark - Facebook Like
+
+- (void)updateLikeCount{
+    
+    API *apiRequest = [[API alloc] init];
+    
+    [apiRequest appendBody:[NSString stringWithFormat:@"%d",self.productId] fieldName:@"products_id"];
+    
+    [apiRequest post:@"s/likeUp"
+        successBlock:^(NSDictionary* result){
+            NSLog(@"%@", result);
+            int resultCode = [[result objectForKey:@"code"] intValue];
+            if (resultCode == kAPI_RESULT_OK){
+                NSNumber *data = [result objectForKey:@"result"];
+                [self setLikeCount:data.integerValue];
+            }
+        }
+         failureBock:^(NSError *error){
+
+         }];
+
+}
+
+- (BOOL)isLikedItem{
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    NSArray *items = [def arrayForKey:kLIKED_ITEMS];
+    
+    for (NSNumber *itemId in items){
+        if (itemId.integerValue == productId){
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
+- (void)setLikeCount:(NSInteger)count{
+    
+    
+    NSString *cnt = [NSString stringWithFormat:@"%d",count];
+    
+    CGSize size = [cnt sizeWithFont:_fbCntLabel.font];
+    size.width += 12;
+    
+    CGRect boxRect = _fbCntLabel.frame;
+    boxRect.size.width = size.width;
+    boxRect.origin.x = _facebookBtn.frame.origin.x - boxRect.size.width + 3;
+    
+    _fbCntLabel.text = cnt;
+    
+    [UIView animateWithDuration:.3
+                     animations:^{
+                         _fbCntLabel.frame = boxRect;
+                         _fbCntLabel.transform = CGAffineTransformMakeScale(1.2, 1.2);
+                     }
+                     completion:^(BOOL finished) {
+                         [UIView animateWithDuration:.3
+                                          animations:^{
+                                              _fbCntLabel.transform = CGAffineTransformMakeScale(1, 1);
+                                          }
+                                          completion:^(BOOL finished) {
+                                              
+                                          }];
+                     }];
+    
+    
+    
+}
+
+static bool _fbReqesting = false;
+
+- (void)publishStory
+{
+    
+    NSString *msg = [NSString stringWithFormat:@"%@ %@ %@ %@",_titleLabel.text, _deviceLabel.text, _priceLabel.text, NSLocalizedString(@"I like it!", nil)];
+    
+    NSString *linkUrl = [NSString stringWithFormat:IS_LOCALE_KO?@"http://casebuy.me/ko/index.php/shop/product?id=%d":@"http://casebuy.me/en/index.php/shop/product?id=%d",self.productId];
+    NSString *thumbUrl = [NSString stringWithFormat:@"%@%@",BASE_URL,[[_images objectAtIndex:_currPage] objectForKey:@"file_path"]];
+    
+    NSMutableDictionary *postParams = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+                                       linkUrl, @"link",
+                                       thumbUrl, @"picture",
+                                       msg,@"message",
+                                       nil];
+    
+    
+    
+    [FBRequestConnection
+     startWithGraphPath:@"me/feed"
+     parameters:postParams
+     HTTPMethod:@"POST"
+     completionHandler:^(FBRequestConnection *connection,
+                         id result,
+                         NSError *error) {
+         NSString *alertText;
+         if (error) {
+             alertText = [NSString stringWithFormat:
+                          @"error: domain = %@, code = %d",
+                          error.domain, error.code];
+             
+             // Show the result in an alert
+             [[[UIAlertView alloc] initWithTitle:@"Result"
+                                         message:alertText
+                                        delegate:self
+                               cancelButtonTitle:@"OK!"
+                               otherButtonTitles:nil]
+              show];
+             
+         } else {
+             alertText = @"Posted successfully.";
+             
+             NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+             NSMutableArray *items = [NSMutableArray arrayWithArray:[def arrayForKey:kLIKED_ITEMS]];
+             [items addObject:[NSNumber numberWithInteger:productId]];
+             [def setObject:items forKey:kLIKED_ITEMS];
+             [def synchronize];
+             _facebookBtn.enabled = NO;
+             
+             [self updateLikeCount];
+             
+         }
+         
+         [_fbActivity stopAnimating];
+         
+         _fbReqesting = false;
+     }];
+}
+
 #pragma mark - Button Actions
+
+- (IBAction)facebookBtnTapped:(id)sender{
+    
+    if (_fbReqesting)
+        return;
+    
+    _fbReqesting = true;
+    
+    [_fbActivity startAnimating];
+    _fbActivity.hidden = NO;
+    
+    NSArray *permission =
+    [NSArray arrayWithObjects:@"email", nil];
+    
+    [FBSession openActiveSessionWithReadPermissions:permission
+                                       allowLoginUI:YES
+                                  completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+                                      
+                                      if (status == FBSessionStateOpen){
+                                          /* handle success + failure in block */
+                                          // can include any of the "publish" or "manage" permissions
+                                          NSArray *permissions = [NSArray arrayWithObjects:@"publish_actions", nil];
+                                          
+                                          [session reauthorizeWithPublishPermissions:permissions
+                                                                     defaultAudience:FBSessionDefaultAudienceFriends
+                                                                   completionHandler:^(FBSession *session, NSError *error) {
+                                                                       /* handle success + failure in block */
+                                                                       if (!error) {
+                                                                           // If permissions granted, publish the story
+                                                                           [self publishStory];
+                                                                       } else {
+                                                                           [[[UIAlertView alloc] initWithTitle:@"Result"
+                                                                                                       message:error.debugDescription
+                                                                                                      delegate:self
+                                                                                             cancelButtonTitle:@"OK!"
+                                                                                             otherButtonTitles:nil]
+                                                                            show];
+                                                                       }
+                                                                   }];
+                                      }
+                                     
+                                  
+                                  }];
+    
+    
+    
+
+
+    return;
+    
+    NSData *urlData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:IS_LOCALE_KO?@"http://casebuy.me/ko/index.php/shop/product?id=%d":@"http://casebuy.me/en/index.php/shop/product?id=%d",self.productId]]];
+    
+    NSString *url = [[NSString alloc] initWithData:urlData encoding:NSUTF8StringEncoding];
+
+    UIImage *photo = [(PhotoZoomView*)[_zoomViews objectAtIndex:_currPage] photoView].image;
+    
+    NSString *msg = [NSString stringWithFormat:@"%@ %@ %@ %@",_titleLabel.text, _deviceLabel.text, _priceLabel.text, NSLocalizedString(@"I like it!", nil)];
+    
+    BOOL displayedNativeDialog =
+    [FBNativeDialogs
+     presentShareDialogModallyFrom:self
+     initialText:msg
+     image:nil
+     url:[NSURL URLWithString:[NSString stringWithFormat:IS_LOCALE_KO?@"http://casebuy.me/ko/index.php/shop/product?id=%d":@"http://casebuy.me/en/index.php/shop/product?id=%d",self.productId]]
+     handler:^(FBNativeDialogResult result, NSError *error) {
+         if (error) {
+             /* handle failure */
+         } else {
+             if (result == FBNativeDialogResultSucceeded) {
+                 /* handle success */
+             } else {
+                 /* handle user cancel */
+             }
+         }
+     }];
+    if (!displayedNativeDialog) {
+        /*
+         Fallback to web-based Feed Dialog:
+         https://developers.facebook.com/docs/howtos/feed-dialog-using-ios-sdk/
+         */
+    }
+}
 
 - (IBAction)backBtnTapped:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
@@ -387,6 +605,9 @@
            if (resultCode == kAPI_RESULT_OK){
                NSDictionary *product = [[result objectForKey:@"result"] objectForKey:@"product"];
                
+               NSNumber *likes = [product objectForKey:@"likes"];
+               [self setLikeCount:likes.integerValue];
+               
                [_productInfo removeAllObjects];
                [_productInfo addEntriesFromDictionary:product];
                
@@ -513,6 +734,12 @@
     [_movingViews addObject:_titleLabel];
     [_movingViews addObject:_priceLabel];
     [_movingViews addObject:_cartButton];
+    
+    
+    // 라이크 한 상품일 경우 버튼 비활성화
+    if ([self isLikedItem]){
+        _facebookBtn.enabled = NO;
+    }
     
 
 }

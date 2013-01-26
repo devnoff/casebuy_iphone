@@ -9,12 +9,11 @@
 #import "CartCell.h"
 
 @implementation CartCell
-@synthesize photoView,titleLabel,priceLabel,qtyButton,delegate;
+@synthesize photoView,titleLabel,priceLabel,qtyButton,delegate,fbBadge;
 
 - (void)dealloc{
     self.delegate = nil;
     _qtyBgView = nil;
-    
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier

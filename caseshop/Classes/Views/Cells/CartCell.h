@@ -16,6 +16,7 @@
     
     UIView *_bgView;
 }
+@property (nonatomic,strong) IBOutlet UIImageView *fbBadge;
 @property (nonatomic,strong) IBOutlet UIImageView *photoView;
 @property (nonatomic,strong) IBOutlet UILabel *titleLabel;
 @property (nonatomic,strong) IBOutlet UILabel *priceLabel;

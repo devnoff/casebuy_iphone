@@ -286,6 +286,9 @@
                [_listData addObjectsFromArray:products];
                [_tableView reloadData];
                
+               // 배송비 : 좋아요 상품이 있을 경우 무료
+               shipAmount = [self existLikedProduct]?0:2500;
+               
                [self calculatePrice];
                
            }
@@ -448,6 +451,37 @@
     [self loadData];
 }
 
+#pragma mark - Like Checking
+
+- (BOOL)existLikedProduct{
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    NSArray *liked = [def arrayForKey:kLIKED_ITEMS];
+    
+    for (NSNumber *itemId in liked){
+        for (NSDictionary *productInfo in _listData){
+            NSDictionary *product = [productInfo objectForKey:@"product"];
+            NSNumber *pId = [product objectForKey:@"id"];
+            if (itemId.integerValue == pId.integerValue){
+                return YES;
+            }
+        }
+    }
+    
+    return NO;
+}
+
+- (BOOL)isLikedItem:(NSInteger)productId{
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    NSArray *liked = [def arrayForKey:kLIKED_ITEMS];
+    
+    for (NSNumber *itemId in liked){
+        if (productId == itemId.integerValue){
+            return YES;
+        }
+    }
+    return NO;
+}
+
 #pragma mark - Shipping control
 
 - (void)localizationCheckout{
@@ -461,8 +495,8 @@
         _withoutShippingView.hidden = YES;
         _withShippingView.hidden = NO;
         
-        // 배송비
-        shipAmount = 2500;
+        // 배송비 : 좋아요 상품이 있을 경우 무료
+        shipAmount = [self existLikedProduct]?0:2500;
         
         // 테이블 뷰 사이즈 조정
         CGRect frame = _tableView.frame;
@@ -553,6 +587,8 @@
     cell.titleLabel.text = [[NSString stringWithFormat:@"%@ %@",[product objectForKey:@"title"],[productInfo objectForKey:@"option_name"]] uppercaseString];
     cell.priceLabel.text = [CurrencyHelper formattedString:[NSNumber numberWithFloat:[[product objectForKey:@"sales_price"] floatValue]] withIdentifier:IDENTIFIED_LOCALE];
     [cell setQty:[productInfo objectForKey:@"qty"]];
+    
+    cell.fbBadge.hidden = ![self isLikedItem:[[product objectForKey:@"id"]integerValue]];
 
     
     [cell.photoView setImageWithURL:[NSURL URLWithString:[product objectForKey:@"thumb"]]];

@@ -28,6 +28,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>casebuy</string>
+				<string>fb198819680263415</string>
 			</array>
 		</dict>
 	</array>
@@ -49,5 +50,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>FacebookAppID</key>
+	<string>198819680263415</string>
 </dict>
 </plist>

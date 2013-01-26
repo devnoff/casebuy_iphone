@@ -22,6 +22,9 @@
     IBOutlet CartButton *_cartButton;
     IBOutlet UIButton *_wallpaperBtn;
     IBOutlet UIActivityIndicatorView *_activity;
+    IBOutlet UIActivityIndicatorView *_fbActivity;
+    IBOutlet UIButton *_facebookBtn;
+    IBOutlet UILabel *_fbCntLabel;
 
     NSMutableArray *_zoomViews;
     

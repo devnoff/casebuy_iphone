@@ -192,6 +192,7 @@
     // 앱 식별 번호
     [data setObject:[[AppDelegate sharedAppdelegate] uuid] forKey:kUUID];
     
+
     
     // 주문 상품 / 주문 수량
     NSMutableArray *products = [NSMutableArray array];

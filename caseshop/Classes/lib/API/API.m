@@ -9,7 +9,7 @@
 #import "API.h"
 #import "SBJson.h"
 #import "NSDictionaryAdditions.h"
-#import "Reachability.h"
+#import "Reachability/Reachability.h"
 
 
 #define HTTP_GET @"GET"

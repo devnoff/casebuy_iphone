@@ -179,15 +179,21 @@
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     NSLog(@"applicationDidBecomeActive");
     
+
+    
     [NoticeController requestNoticeWithDelegate:self];
     
     [self setBrightness];
+    
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
+    
+
 }
 
 - (void)saveContext
@@ -307,11 +313,21 @@
 
 #pragma mark - Application Handle Open URL
 
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    
+- (BOOL)handleOpenURL:(NSURL*)url
+{
+
     return YES;
 }
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return [self handleOpenURL:url];
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return [self handleOpenURL:url];
+}
 
 
 #pragma mark - Brightness

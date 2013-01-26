@@ -49,7 +49,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -76,6 +76,10 @@
     
     else if (indexPath.row == 3){
         cell.textLabel.text = NSLocalizedString(@"CONTACT", nil);
+    }
+    
+    else if (indexPath.row == 4){
+        cell.textLabel.text = NSLocalizedString(@"COMPANY", nil);
     }
     
     return cell;
@@ -113,6 +117,14 @@
                             recipient:@"casebuy@cultstory.com"
                                  memo:NSLocalizedString(@"Sent from CASEBUY iPhone App", nil)
                                target:self];
+    }
+    
+    else if (indexPath.row == 4){
+        CSWebViewController *legal = [[CSWebViewController alloc] initWithNibName:@"CSWebViewController" bundle:nil];
+        legal.title = NSLocalizedString(@"COMPANY", nil);
+        legal.startUrl = @"http://m.cultstory.com/about";
+        legal.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:legal animated:YES];
     }
     
     [tableView performSelector:@selector(deselectRowAtIndexPath:animated:) withObject:indexPath afterDelay:.5];

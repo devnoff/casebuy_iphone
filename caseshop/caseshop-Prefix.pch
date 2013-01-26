@@ -37,3 +37,5 @@
 #define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
 
 #define CATEGORY_MINIMUM_COUNT 9999
+
+#define kLIKED_ITEMS @"liked_items"

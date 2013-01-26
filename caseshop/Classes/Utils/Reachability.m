@@ -54,7 +54,7 @@
 
 #import <CoreFoundation/CoreFoundation.h>
 
-#import "Reachability.h"
+#import "MyReachability.h"
 
 #define kShouldPrintReachabilityFlags 0
 
