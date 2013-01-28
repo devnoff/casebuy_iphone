@@ -9,6 +9,7 @@
 #import "NoticeController.h"
 #import "API.h"
 #import "AppDelegate.h"
+#import "NoticeDetailController.h"
 
 #define NOTICE_ID_FOR_WAIT_PAYMENT -1
 @implementation NoticeController
@@ -36,18 +37,16 @@
            
            int resultCode = [[result objectForKey:@"code"] intValue];
            if (resultCode == kAPI_RESULT_OK){
-               NSDictionary *notice = [result objectForKey:@"result"];
-               
-               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[notice objectForKey:@"title"]
-                                                                message:NSLocalizedString(@"There is something you should know. Would you like to check it out?", nil)
-                                                               delegate:delegate
-                                                      cancelButtonTitle:NSLocalizedString(@"No, Thanks",nil)
-                                                      otherButtonTitles:NSLocalizedString(@"Check it out",nil), nil];
-               alert.tag = [[notice objectForKey:@"id"] integerValue];
-               
-               [NoticeController setLatestNoticeId:alert.tag];
-               
-               [alert show];
+               NSDictionary *noticeData = [result objectForKey:@"result"];
+               NSInteger noticeId = [[noticeData objectForKey:@"id"] integerValue];
+               [NoticeController setLatestNoticeId:noticeId];
+               NoticeDetailController *notice = [[NoticeDetailController alloc] initWithNibName:@"NoticeDetailController" bundle:nil];
+               notice.itemId = noticeId;
+               notice.hasLeftCancelBtn = YES;
+               notice.title = NSLocalizedString(@"NOTICE",nil);
+               UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:notice];
+               [[AppDelegate sharedAppdelegate].window.rootViewController presentModalViewController:nav animated:YES];
+
            }
            
        }
