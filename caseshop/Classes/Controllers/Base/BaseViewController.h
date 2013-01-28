@@ -13,7 +13,8 @@ typedef enum {
     RightButtonTypeNext,
     RightButtonTypeReply,
     RightButtonTypeTile,
-    RightButtonTypeList
+    RightButtonTypeList,
+    RightButtonTypeEdit
 } RightButtonType;
 
 typedef enum {
@@ -60,10 +61,12 @@ typedef enum {
 
 - (void)viewShouldRefresh;
 
+- (void)setLeftBackButton;
 - (void)setLeftCloseButton;
 - (void)setLeftCancelButton;
 - (void)setRightButtonType:(RightButtonType)type;
 - (void)setLeftButtonType:(LeftButtonType)type;
+- (void)setRightCustomButtonWithTitle:(NSString*)title target:(id)target selector:(SEL)selecto;
 - (void)setLeftCustomButtonWithTitle:(NSString*)title target:(id)target selector:(SEL)selector;
 - (void)setLeftCustomButtonWithTitle:(NSString*)title;
 - (void)setRightZzimButtonZzimmed:(BOOL)zzimmed target:(id) target;
