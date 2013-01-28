@@ -474,8 +474,9 @@
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
     NSArray *liked = [def arrayForKey:kLIKED_ITEMS];
     
-    for (NSNumber *itemId in liked){
-        if (productId == itemId.integerValue){
+    for (NSDictionary *product in liked){
+        NSNumber *pId = [product objectForKey:@"id"];
+        if (productId == pId.integerValue){
             return YES;
         }
     }
@@ -587,10 +588,11 @@
     cell.titleLabel.text = [[NSString stringWithFormat:@"%@ %@",[product objectForKey:@"title"],[productInfo objectForKey:@"option_name"]] uppercaseString];
     cell.priceLabel.text = [CurrencyHelper formattedString:[NSNumber numberWithFloat:[[product objectForKey:@"sales_price"] floatValue]] withIdentifier:IDENTIFIED_LOCALE];
     [cell setQty:[productInfo objectForKey:@"qty"]];
-    
-    cell.fbBadge.hidden = ![self isLikedItem:[[product objectForKey:@"id"]integerValue]];
 
     
+    NSNumber *productId = [productInfo objectForKey:@"products_id"];
+    cell.fbBadge.hidden = ![self isLikedItem:productId.integerValue];
+
     [cell.photoView setImageWithURL:[NSURL URLWithString:[product objectForKey:@"thumb"]]];
     
     return cell;
