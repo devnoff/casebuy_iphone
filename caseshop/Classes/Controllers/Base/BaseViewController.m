@@ -164,6 +164,20 @@
 
 #pragma mark - Navigation Button
 
+- (void)setLeftBackButton{
+    
+    // 백버튼 커스터마이징
+    UIImage *btn = [UIImage imageNamed:@"WBtnBack"];
+    UIImage *btnOn = [UIImage imageNamed:@"WBtnBack_On"];
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, btn.size.width, btn.size.height)];
+    [button setImage:btn forState:UIControlStateNormal];
+    [button setImage:btnOn forState:UIControlStateHighlighted];
+    [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
+    self.navigationItem.leftBarButtonItem = item;
+}
+
 - (void)setLeftCloseButton{
     UIImage *btn = [UIImage imageNamed:@"NavBtnGeneral"];
     UIImage *btnOn = [UIImage imageNamed:@"NavBtnGeneral_On"];
@@ -213,6 +227,11 @@
         btnOn = [UIImage imageNamed:@"WBtnModeThumb_On"];
     }
     
+    else if (type == RightButtonTypeEdit){
+        btn = [UIImage imageNamed:@"WBtnEdit"];
+        btnOn = [UIImage imageNamed:@"WBtnEdit_On"];
+    }
+    
     
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, btn.size.width, btn.size.height)];
     [button.titleLabel setFont:[UIFont boldSystemFontOfSize:13]];
@@ -229,6 +248,10 @@
     
     else if (type ==  RightButtonTypeTile){
         [button addTarget:self action:@selector(tile) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    else if (type == RightButtonTypeEdit){
+        [button addTarget:self action:@selector(edit) forControlEvents:UIControlEventTouchUpInside];
     }
     
     
@@ -288,6 +311,27 @@
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.leftBarButtonItem = item;
     
+}
+
+- (void)setRightCustomButtonWithTitle:(NSString*)title target:(id)target selector:(SEL)selector{
+    UIFont *titleFont = [UIFont fontWithName:@"DINPro-Bold" size:11.0f];
+    CGSize size = [title sizeWithFont:titleFont];
+    
+    UIImage *btn = [[UIImage imageNamed:@"WBtnBlank"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 20, 0, 20)];
+    UIImage *btnOn = [UIImage imageNamed:@"WBtnBlank_On"];
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, size.width + 20, btn.size.height)];
+    [button setTitle:title forState:UIControlStateNormal];
+    [button.titleLabel setFont:titleFont];
+    
+    [button setTitleColor:[UIColor colorWithRed:0.431 green:0.792 blue:0.992 alpha:1.000] forState:UIControlStateNormal];
+    [button.titleLabel setShadowColor:[UIColor clearColor]];
+    [button.titleLabel setShadowOffset:CGSizeMake(0, 0)];
+    [button setBackgroundImage:btn forState:UIControlStateNormal];
+    [button setBackgroundImage:btnOn forState:UIControlStateHighlighted];
+    [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
+    self.navigationItem.rightBarButtonItem = item;
 }
 
 - (void)setLeftCustomButtonWithTitle:(NSString*)title target:(id)target selector:(SEL)selector{
