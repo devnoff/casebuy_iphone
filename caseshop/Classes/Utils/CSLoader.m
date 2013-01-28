@@ -58,12 +58,25 @@ static CSLoader *instance;
 {
     
     UIImage *image = [UIImage imageWithData:_data];
-    
     _imageView.image = image;
     
-    [UIView animateWithDuration:.3 animations:^{ 
+    [UIView animateWithDuration:.3 animations:^{
         _imageView.alpha = 1.0f;
     }];
+    
+    if (_scrollView){
+        float ratio = image.size.width / image.size.height;
+        float w = 320;
+        float h = (w / ratio) + 100;
+        _scrollView.contentSize = CGSizeMake(w, h);
+        
+        CGRect rect = _imageView.frame;
+        rect.size = _scrollView.contentSize;
+        rect.size.height -= 100;
+//        rect.origin.y += 100;
+        _imageView.frame = rect;
+
+    }
     
     
     [[SDImageCache sharedImageCache] storeImage:image forKey:_url toDisk:YES];
@@ -110,6 +123,52 @@ static CSLoader *instance;
         }
     }];
     
+}
+
+- (void)loadRemoteImageForZoomView:(UIScrollView*)scrollView imageView:(UIImageView*)imageView withUrl:(NSString*)url{
+    _imageView = imageView;
+    _scrollView = scrollView;
+    
+    [[SDImageCache sharedImageCache] queryDiskCacheForKey:url done:^(UIImage *image, SDImageCacheType cacheType) {
+        if (image){
+            
+            if (_scrollView){
+                float ratio = image.size.width / image.size.height;
+                float w = 320;
+                float h = (w / ratio) + 100;
+                _scrollView.contentSize = CGSizeMake(w, h);
+                
+                CGRect rect = _imageView.frame;
+                rect.size = _scrollView.contentSize;
+                rect.size.height -= 100;
+//                rect.origin.y += 100;
+                _imageView.frame = rect;
+                
+
+                
+            }
+            
+            _imageView.image = image;
+            [UIView animateWithDuration:.3 animations:^{
+                _imageView.alpha = 1.0f;
+            }];
+        } else {
+            _imageView.alpha = .0f;
+            
+            progressView = [[DACircularProgressView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+            progressView.roundedCorners = YES;
+            progressView.progressTintColor = [UIColor colorWithRed:0.431 green:0.792 blue:0.992 alpha:1.000];
+            progressView.trackTintColor = [UIColor lightGrayColor];
+            progressView.center = imageView.superview.center;
+            [imageView.superview addSubview:progressView];
+            
+            _url = url;
+            
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+            [NSURLConnection connectionWithRequest:request delegate:self];
+            
+        }
+    }];
 }
 
 

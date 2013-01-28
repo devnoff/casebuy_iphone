@@ -46,6 +46,7 @@
     _fbActivity = nil;
     _facebookBtn = nil;
     _fbCntLabel = nil;
+    _descBg = nil;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -244,11 +245,11 @@ static bool _fbReqesting = false;
 
     return;
     
-    NSData *urlData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:IS_LOCALE_KO?@"http://casebuy.me/ko/index.php/shop/product?id=%d":@"http://casebuy.me/en/index.php/shop/product?id=%d",self.productId]]];
+//    NSData *urlData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:IS_LOCALE_KO?@"http://casebuy.me/ko/index.php/shop/product?id=%d":@"http://casebuy.me/en/index.php/shop/product?id=%d",self.productId]]];
     
-    NSString *url = [[NSString alloc] initWithData:urlData encoding:NSUTF8StringEncoding];
-
-    UIImage *photo = [(PhotoZoomView*)[_zoomViews objectAtIndex:_currPage] photoView].image;
+//    NSString *url = [[NSString alloc] initWithData:urlData encoding:NSUTF8StringEncoding];
+//
+//    UIImage *photo = [(PhotoZoomView*)[_zoomViews objectAtIndex:_currPage] photoView].image;
     
     NSString *msg = [NSString stringWithFormat:@"%@ %@ %@ %@",_titleLabel.text, _deviceLabel.text, _priceLabel.text, NSLocalizedString(@"I like it!", nil)];
     
@@ -501,6 +502,49 @@ static bool _fbReqesting = false;
 
 #pragma mark - Data
 
+- (void)loadDescImage{
+    NSString *imgPath = [_images objectAtIndex:0];
+    
+    PhotoZoomView *scrollView = [[PhotoZoomView alloc] initWithFrame:_scrollView.frame];
+    
+    scrollView.scrollEnabled = YES;
+    scrollView.delegate = self;
+    scrollView.bounces = NO;
+    scrollView.alwaysBounceVertical = NO;
+    scrollView.alwaysBounceHorizontal = NO;
+    scrollView.showsHorizontalScrollIndicator = NO;
+    scrollView.showsVerticalScrollIndicator = NO;
+    scrollView.decelerationRate = UIScrollViewDecelerationRateFast;
+    scrollView.clipsToBounds = NO;
+    scrollView.scrollsToTop = NO;
+    scrollView.maximumZoomScale = 2;
+    scrollView.minimumZoomScale = 1;
+    
+    scrollView.photoView.contentMode = UIViewContentModeScaleAspectFill;
+    scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    
+    _scrollView.contentInset = UIEdgeInsetsMake(65, 0, 0, 0);
+    
+    [_scrollView setBounces:YES];
+    scrollView.bounces = YES;
+
+
+    _descBg.hidden = NO;
+    _pageControl.hidden = YES;
+    
+    [_scrollView addSubview:scrollView];
+    [_zoomViews addObject:scrollView];
+    
+    [[CSLoader sharedLoader] loadRemoteImageForZoomView:scrollView imageView:scrollView.photoView withUrl:imgPath];
+    
+    [UIView animateWithDuration:.4
+                     animations:^{
+                         _scrollView.alpha = 1.0f;
+                     }
+                     completion:^(BOOL finished){
+                     }];
+}
+
 - (void)loadProductImages{
     
     if (!_images || _images.count < 1) return;
@@ -532,7 +576,6 @@ static bool _fbReqesting = false;
         scrollView.maximumZoomScale = 2;
         scrollView.minimumZoomScale = 1;
         scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-
         
         [_scrollView addSubview:scrollView];
         [_zoomViews addObject:scrollView];
@@ -646,7 +689,19 @@ static bool _fbReqesting = false;
                
                _cartItem = [[[result objectForKey:@"result"] objectForKey:@"is_cartItem"] boolValue];
                
-               [self loadProductImages];
+               
+               NSString *descURL = [product objectForKey:@"description"];
+               if ((NSNull *)descURL != [NSNull null]){
+                   _descLabel.text = nil;
+                   [_images removeAllObjects];
+                   [_images addObject:descURL];
+                   [self loadDescImage];
+                   
+               } else {
+                   [self loadProductImages];
+               }
+               
+               
                
                _activity.hidden = YES;
                
@@ -741,6 +796,7 @@ static bool _fbReqesting = false;
     [_movingViews addObject:_titleLabel];
     [_movingViews addObject:_priceLabel];
     [_movingViews addObject:_cartButton];
+    [_movingViews addObject:_descBg];
     
     
     // 라이크 한 상품일 경우 버튼 비활성화

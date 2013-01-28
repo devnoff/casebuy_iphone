@@ -12,7 +12,7 @@
 #import "CartButton.h"
 
 @interface ProductDetailController : BaseViewController<UIScrollViewDelegate>{
-    
+    IBOutlet UIView *_descBg;
     IBOutlet UIScrollView *_scrollView;
     IBOutlet UIPageControl *_pageControl;
     IBOutlet CustomLabel *_deviceLabel;

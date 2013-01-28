@@ -10,6 +10,7 @@
 #import "DACircularProgressView.h"
 
 @interface CSLoader : NSObject<NSURLConnectionDataDelegate>{
+    UIScrollView *_scrollView;
     UIImageView *_imageView;
     NSMutableData *_data;
     NSString *_url;
@@ -20,5 +21,6 @@
 + (CSLoader *) sharedLoader;
 
 - (void)loadRemoteImageForView:(UIImageView *)imageView withUrl:(NSString*)url;
+- (void)loadRemoteImageForZoomView:(UIScrollView*)scrollView imageView:(UIImageView*)imageView withUrl:(NSString*)url;
 
 @end

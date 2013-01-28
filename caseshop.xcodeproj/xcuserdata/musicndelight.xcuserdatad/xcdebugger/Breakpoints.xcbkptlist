@@ -60,7 +60,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "caseshop/Classes/Controllers/Shop/ProductDetailController.m"
-         timestampString = "380796820.828304"
+         timestampString = "381087159.718833"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "39"
@@ -242,11 +242,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "caseshop/Classes/Controllers/Shop/ProductDetailController.m"
-         timestampString = "381054425.005304"
+         timestampString = "381090933.640586"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "667"
-         endingLineNumber = "667"
+         startingLineNumber = "723"
+         endingLineNumber = "723"
          landmarkName = "-loadData"
          landmarkType = "5">
       </FileBreakpoint>
@@ -255,11 +255,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "caseshop/Classes/Controllers/Shop/ProductDetailController.m"
-         timestampString = "381054425.005304"
+         timestampString = "381089040.868344"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "336"
-         endingLineNumber = "336"
+         startingLineNumber = "337"
+         endingLineNumber = "337"
          landmarkName = "-cartBtnTapped:"
          landmarkType = "5">
       </FileBreakpoint>
