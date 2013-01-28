@@ -22,7 +22,7 @@
 @end
 
 @implementation ShopViewController
-@synthesize leftType,dispType,categoryId,shopType;
+@synthesize leftType,dispType,categoryId,shopType,flag;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -324,7 +324,7 @@
     
     API *apiRequest = [[API alloc] init];
     
-    [apiRequest get:[NSString stringWithFormat:@"s/categoryProducts?categories_id=%d&offset=%d&sort_order=%@",categoryId,_listData.count,sortBy]
+    [apiRequest get:[NSString stringWithFormat:@"s/categoryProducts/%@?categories_id=%d&offset=%d&sort_order=%@",self.flag,categoryId,_listData.count,sortBy]
        successBlock:^(NSDictionary *result){
            NSLog(@"loadCategoryProducts: %@", result);
            int resultCode = [[result objectForKey:@"code"] intValue];

@@ -6,8 +6,12 @@
 //  Copyright (c) 2013년 CultStory Inc. All rights reserved.
 //
 
+#import "MoreViewController.h"
 #import "ProductListController.h"
 
-@interface ProductLikedController : ProductListController
+@interface ProductLikedController : MoreViewController<ProductListControllerDelegate>{
+    ProductListController *_productList;
+    
+}
 
 @end

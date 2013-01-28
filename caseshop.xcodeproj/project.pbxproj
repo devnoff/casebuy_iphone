@@ -148,6 +148,7 @@
 		B815ECB41650E7FD0059D1B7 /* ShippingOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = B815EC9E1650E7FD0059D1B7 /* ShippingOptions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B815ECB71650E8090059D1B7 /* ECNetworkHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B815ECB61650E8090059D1B7 /* ECNetworkHandler.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B815ECBB1650F24A0059D1B7 /* distribution.plist in Resources */ = {isa = PBXBuildFile; fileRef = B815ECBA1650F2490059D1B7 /* distribution.plist */; };
+		B81A27A316B66C7E00D48536 /* ProductLikedController.m in Sources */ = {isa = PBXBuildFile; fileRef = B81A27A216B66C7D00D48536 /* ProductLikedController.m */; };
 		B8268AED16B1357A0096B3E9 /* ShopMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8268AEB16B135760096B3E9 /* ShopMainController.m */; };
 		B8268AEE16B1357A0096B3E9 /* ShopMainController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8268AEC16B135780096B3E9 /* ShopMainController.xib */; };
 		B8268B2616B23A250096B3E9 /* FbAsking@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B8268B2016B23A250096B3E9 /* FbAsking@2x.png */; };
@@ -489,6 +490,8 @@
 		B815ECB51650E8090059D1B7 /* ECNetworkHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECNetworkHandler.h; sourceTree = "<group>"; };
 		B815ECB61650E8090059D1B7 /* ECNetworkHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECNetworkHandler.m; sourceTree = "<group>"; };
 		B815ECBA1650F2490059D1B7 /* distribution.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = distribution.plist; sourceTree = "<group>"; };
+		B81A27A116B66C7D00D48536 /* ProductLikedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductLikedController.h; sourceTree = "<group>"; };
+		B81A27A216B66C7D00D48536 /* ProductLikedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductLikedController.m; sourceTree = "<group>"; };
 		B8268AEA16B135760096B3E9 /* ShopMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopMainController.h; sourceTree = "<group>"; };
 		B8268AEB16B135760096B3E9 /* ShopMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopMainController.m; sourceTree = "<group>"; };
 		B8268AEC16B135780096B3E9 /* ShopMainController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopMainController.xib; sourceTree = "<group>"; };
@@ -1359,6 +1362,8 @@
 				B855D469163F7EAE002B7A0F /* ProductDetailController.h */,
 				B855D46A163F7EAE002B7A0F /* ProductDetailController.m */,
 				B855D46B163F7EAF002B7A0F /* ProductDetailController.xib */,
+				B81A27A116B66C7D00D48536 /* ProductLikedController.h */,
+				B81A27A216B66C7D00D48536 /* ProductLikedController.m */,
 			);
 			path = Shop;
 			sourceTree = "<group>";
@@ -1806,6 +1811,7 @@
 				B844A54416780D0C00292989 /* ZoomGuideController.m in Sources */,
 				B814A90D169EAD9400A218B9 /* CartButton.m in Sources */,
 				B8268AED16B1357A0096B3E9 /* ShopMainController.m in Sources */,
+				B81A27A316B66C7E00D48536 /* ProductLikedController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

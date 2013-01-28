@@ -12,6 +12,10 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "ShopViewController.h"
 
+#define FLAG_POP 1
+#define FLAG_NEW 2
+#define FLAG_ALL 3
+#define FLAG_BEST 4
 
 @interface ShopMainController ()
 
@@ -111,7 +115,7 @@
     _tileController.listData = _listData;
 }
 
-#pragma makr - Button Actions
+#pragma mark - Button Actions
 
 - (void)device{
     DeviceSelectController *device = [[DeviceSelectController alloc] initWithNibName:@"DeviceSelectController" bundle:nil];
@@ -120,6 +124,30 @@
     [self presentModalViewController:nav animated:YES];
 }
 
+
+- (IBAction)flagBtnTapped:(id)sender{
+    ShopViewController *shop = [[ShopViewController alloc] initWithNibName:@"ShopViewController" bundle:nil];
+    shop.categoryId = self.categoryId;
+    shop.shopType = ShopTypeList;
+    shop.dispType = ShopDispTypeCategoryProductsList;
+    
+    if ([(UIButton*)sender tag] == FLAG_ALL){
+        shop.flag = @"";
+    }
+    else if ([(UIButton*)sender tag] == FLAG_POP){
+        shop.flag = @"pop";
+    }
+    else if ([(UIButton*)sender tag] == FLAG_NEW){
+        shop.flag = @"new";
+    }
+    else if ([(UIButton*)sender tag] == FLAG_BEST){
+        shop.flag = @"hit";
+    }
+    
+    
+    shop.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:shop animated:YES];
+}
 
 
 #pragma mark - Data
@@ -166,7 +194,7 @@
     
     [apiRequest get:[NSString stringWithFormat:@"s/mainContentCategory?categories_id=%d",categoryId]
        successBlock:^(NSDictionary *result){
-           NSLog(@"mainContentCategory: %@", result);
+           NSLog(@"mainContentCategory: %@, category id: %d", result, categoryId);
            
            int resultCode = [[result objectForKey:@"code"] intValue];
            if (resultCode == kAPI_RESULT_OK){
@@ -280,15 +308,7 @@
     
 }
 
-- (IBAction)allProductTapped:(id)sender{
-    ShopViewController *shop = [[ShopViewController alloc] initWithNibName:@"ShopViewController" bundle:nil];
-    shop.categoryId = self.categoryId;
-    shop.shopType = ShopTypeList;
-    shop.dispType = ShopDispTypeCategoryProductsList;
-//    [shop locateNavigationButtons];
-    [self.navigationController pushViewController:shop animated:YES];
 
-}
 
 - (void)viewDidLoad
 {
@@ -323,6 +343,10 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewShouldRefresh{
+    [self loadData];
 }
 
 @end

@@ -11,6 +11,7 @@
 #import "OrderListController.h"
 #import "NoticeViewController.h"
 #import "CSWebViewController.h"
+#import "ProductLikedController.h"
 
 @interface MoreViewController ()
 
@@ -49,7 +50,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return 6;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -80,6 +81,10 @@
     
     else if (indexPath.row == 4){
         cell.textLabel.text = NSLocalizedString(@"COMPANY", nil);
+    }
+    
+    else if (indexPath.row == 5){
+        cell.textLabel.text = NSLocalizedString(@"LIKED PRODUCTS", nil);
     }
     
     return cell;
@@ -125,6 +130,13 @@
         legal.startUrl = @"http://m.cultstory.com/about";
         legal.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:legal animated:YES];
+    }
+    
+    else if (indexPath.row == 5){
+        ProductLikedController *liked = [[ProductLikedController alloc] initWithNibName:@"MoreViewController" bundle:nil];
+        liked.title = NSLocalizedString(@"LIKED PRODUCTS", nil);
+        liked.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:liked animated:YES];
     }
     
     [tableView performSelector:@selector(deselectRowAtIndexPath:animated:) withObject:indexPath afterDelay:.5];

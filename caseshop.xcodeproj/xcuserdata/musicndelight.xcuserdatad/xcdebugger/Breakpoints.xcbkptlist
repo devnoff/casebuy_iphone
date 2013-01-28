@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "caseshop/Classes/Controllers/Cart/CartViewController.m"
-         timestampString = "380806214.043245"
+         timestampString = "381057710.654846"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "696"
-         endingLineNumber = "696"
+         startingLineNumber = "698"
+         endingLineNumber = "698"
          landmarkName = "-cartCellDidStartEditing:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "caseshop/Classes/Controllers/Cart/CartViewController.m"
-         timestampString = "380806214.043245"
+         timestampString = "381057710.654846"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "676"
-         endingLineNumber = "676"
+         startingLineNumber = "678"
+         endingLineNumber = "678"
          landmarkName = "-cartCellShouldUpdate:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -242,11 +242,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "caseshop/Classes/Controllers/Shop/ProductDetailController.m"
-         timestampString = "380806265.430938"
+         timestampString = "381054425.005304"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "660"
-         endingLineNumber = "660"
+         startingLineNumber = "667"
+         endingLineNumber = "667"
          landmarkName = "-loadData"
          landmarkType = "5">
       </FileBreakpoint>
@@ -255,11 +255,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "caseshop/Classes/Controllers/Shop/ProductDetailController.m"
-         timestampString = "380806265.430938"
+         timestampString = "381054425.005304"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "329"
-         endingLineNumber = "329"
+         startingLineNumber = "336"
+         endingLineNumber = "336"
          landmarkName = "-cartBtnTapped:"
          landmarkType = "5">
       </FileBreakpoint>

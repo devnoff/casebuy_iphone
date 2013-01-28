@@ -57,6 +57,7 @@ typedef enum {
 @property (nonatomic) ShopDispType dispType;
 @property (nonatomic) ShopType shopType;
 @property (nonatomic) NSInteger categoryId;
+@property (nonatomic,retain) NSString *flag;
 
 - (id)initForList;
 - (id)initForCategory;

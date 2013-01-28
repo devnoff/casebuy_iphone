@@ -20,7 +20,7 @@
 @end
 
 @implementation ProductListController
-@synthesize listData=_listData,parentController;
+@synthesize listData=_listData,parentController,canEdit,delegate;
 
 
 #pragma mark - UITableViewDataSource
@@ -97,6 +97,18 @@
     
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return canEdit;
+}
+
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (delegate && [delegate respondsToSelector:@selector(tableView:commitEditingStyle:forRowAtIndexPath:)]){
+        [delegate tableView:tableView commitEditingStyle:editingStyle forRowAtIndexPath:indexPath];
+    }
+}
 
 
 
@@ -108,22 +120,6 @@
     }
 }
 
-//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-//    ShopViewController *parent = (ShopViewController*)parentController;
-////    if (parentController && [parentController respondsToSelector:@selector(scrollViewDidEndDecelerating:)]){
-////        [parentController performSelector:@selector(scrollViewDidEndDecelerating:) withObject:scrollView];
-////    }
-//    CGPoint point = scrollView.contentOffset;
-//    CGSize size = scrollView.contentSize;
-//    
-//    NSLog(@"%f %f %f %f",point.x, point.y, size.width, size.height);
-//    point.y += [self tableView:nil heightForRowAtIndexPath:nil]/2;
-//    
-//    NSIndexPath *indexPath = [parent.tableView indexPathForRowAtPoint:point];
-//    [parent.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
-//    
-//
-//}
 
 
 

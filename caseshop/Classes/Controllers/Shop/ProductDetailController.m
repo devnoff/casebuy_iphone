@@ -85,7 +85,8 @@
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
     NSArray *items = [def arrayForKey:kLIKED_ITEMS];
     
-    for (NSNumber *itemId in items){
+    for (NSDictionary *item in items){
+        NSNumber *itemId = [item objectForKey:@"id"];
         if (itemId.integerValue == productId){
             return YES;
         }
@@ -171,7 +172,13 @@ static bool _fbReqesting = false;
              
              NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
              NSMutableArray *items = [NSMutableArray arrayWithArray:[def arrayForKey:kLIKED_ITEMS]];
-             [items addObject:[NSNumber numberWithInteger:productId]];
+             NSMutableDictionary *item = [NSMutableDictionary dictionary];
+             [item setObject:_titleLabel.text forKey:@"title"];
+             [item setObject:[_productInfo objectForKey:@"sales_price"] forKey:@"sales_price"];
+             [item setObject:[_productInfo objectForKey:@"id"] forKey:@"id"];
+             [item setObject:[_productInfo objectForKey:@"image"] forKey:@"image"];
+             
+             [items addObject:item];
              [def setObject:items forKey:kLIKED_ITEMS];
              [def synchronize];
              _facebookBtn.enabled = NO;
