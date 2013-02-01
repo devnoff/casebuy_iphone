@@ -46,7 +46,7 @@
     if (delegate && [delegate respondsToSelector:@selector(paymentControllerCancelPayment:)])
         [delegate paymentControllerCancelPayment:self];
     
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
     
     [self.navigationController popViewControllerAnimated:YES];
 }

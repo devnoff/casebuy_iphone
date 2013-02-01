@@ -23,7 +23,7 @@
     
     mail.mailComposeDelegate = targetController;
     
-    [targetController presentModalViewController:mail animated:YES];
+    [targetController presentViewController:mail animated:YES completion:nil];
 
 }
 

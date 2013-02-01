@@ -121,7 +121,7 @@
     DeviceSelectController *device = [[DeviceSelectController alloc] initWithNibName:@"DeviceSelectController" bundle:nil];
     device.currDeviceIdx = 1;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:device];
-    [self presentModalViewController:nav animated:YES];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 

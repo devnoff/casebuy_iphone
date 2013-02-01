@@ -175,7 +175,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.textLabel.textColor = [UIColor colorWithWhite:0.447 alpha:1.000];
         cell.textLabel.font = [UIFont systemFontOfSize:15];
-        cell.textLabel.minimumFontSize = 10;
+        [cell.textLabel setMinimumScaleFactor:.5];
         cell.backgroundColor = [UIColor whiteColor];
 	}
     

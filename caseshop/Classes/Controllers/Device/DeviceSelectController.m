@@ -40,7 +40,7 @@
 #pragma mark - Actions
 
 - (void)cancel{
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
@@ -48,7 +48,7 @@
 #pragma mark - Button Actions
 
 - (void)close{
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

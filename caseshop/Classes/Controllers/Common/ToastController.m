@@ -38,7 +38,7 @@ static ToastController *instance;
     label.backgroundColor = [UIColor colorWithRed:0.431 green:0.792 blue:0.992 alpha:1.000];
     label.font = [UIFont boldSystemFontOfSize:14.0f];
     label.textColor = [UIColor whiteColor];
-    label.textAlignment = UITextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentCenter;
     label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     label.alpha = .0f;
     
@@ -72,7 +72,7 @@ static ToastController *instance;
     
     UILabel *label = [[UILabel alloc] initWithFrame:bgView.frame];
     label.backgroundColor = [UIColor clearColor];
-    label.textAlignment = UITextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont boldSystemFontOfSize:20];
     label.textColor = [UIColor whiteColor];
     if (type == ToastTypeZzim){
@@ -152,8 +152,8 @@ static ToastController *instance;
     bgView.alpha = .0f;
     [view addSubview:bgView];
     
-    if (root.modalViewController)
-        [root.modalViewController.view addSubview:view];
+    if (root.presentedViewController)
+        [root.presentedViewController.view addSubview:view];
     else
         [root.view addSubview:view];
     

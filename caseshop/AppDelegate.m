@@ -143,6 +143,8 @@
 //    [[SDImageCache sharedImageCache] clearDisk];
 //    [[SDImageCache sharedImageCache] cleanDisk];
     
+    [self setBrightness];
+    
     return YES;
 }
 
@@ -224,7 +226,7 @@
         notice.hasLeftCancelBtn = YES;
         notice.title = NSLocalizedString(@"NOTICE",nil);
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:notice];
-        [self.window.rootViewController presentModalViewController:nav animated:YES];
+        [self.window.rootViewController presentViewController:nav animated:YES completion:nil];
     }
     
 }
@@ -334,10 +336,12 @@
 
 - (void)setBrightness{
     float originBriteness = [[UIScreen mainScreen] brightness];
-    if (originBriteness < .7){
-        [[UIScreen mainScreen] setBrightness:.7];
-        _originBriteness = originBriteness;
+    if (originBriteness < .65){
+        [[UIScreen mainScreen] setBrightness:.65];
+        originBriteness = .65;
     }
+    
+    _originBriteness = originBriteness;
 }
 
 - (void)restoreBrightness{

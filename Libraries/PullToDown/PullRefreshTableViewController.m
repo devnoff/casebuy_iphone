@@ -96,7 +96,7 @@
     refreshLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 2, 320, REFRESH_HEADER_HEIGHT-2)];
     refreshLabel.backgroundColor = [UIColor clearColor];
     refreshLabel.font = [UIFont boldSystemFontOfSize:12.0];
-    refreshLabel.textAlignment = UITextAlignmentCenter;
+    refreshLabel.textAlignment = NSTextAlignmentCenter;
     refreshLabel.textColor = [UIColor grayColor];
     refreshLabel.shadowColor = RGBA(169, 101, 46, .25);
     refreshLabel.shadowOffset = CGSizeMake(0, -1);

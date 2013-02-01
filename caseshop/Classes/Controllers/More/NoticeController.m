@@ -45,7 +45,7 @@
                notice.hasLeftCancelBtn = YES;
                notice.title = NSLocalizedString(@"NOTICE",nil);
                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:notice];
-               [[AppDelegate sharedAppdelegate].window.rootViewController presentModalViewController:nav animated:YES];
+               [[AppDelegate sharedAppdelegate].window.rootViewController presentViewController:nav animated:YES completion:nil];
 
            }
            

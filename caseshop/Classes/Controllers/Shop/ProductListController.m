@@ -59,7 +59,7 @@
     
     
     [cell setTitle:[item objectForKey:@"title"]
-             price:[CurrencyHelper formattedString:[NSNumber numberWithInteger:[[item objectForKey:@"sales_price"] integerValue]] withIdentifier:IDENTIFIED_LOCALE]
+             price:[CurrencyHelper formattedString:[NSNumber numberWithFloat:[[item objectForKey:@"sales_price"] floatValue]] withIdentifier:IDENTIFIED_LOCALE]
              photo:nil];
     
 
@@ -73,7 +73,7 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    ShopViewController *parent = (ShopViewController*)parentController;
+//    ShopViewController *parent = (ShopViewController*)parentController;
 //    [parent.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
     
     // 애니메이션 후 로드

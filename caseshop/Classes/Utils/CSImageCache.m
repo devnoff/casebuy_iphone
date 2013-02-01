@@ -19,7 +19,7 @@ static CSImageCache *instance;
 
 - (void)dealloc{
     imgCache = nil;
-    dispatch_release(queue);
+//    dispatch_release(queue);
 }
 
 - (id)init{

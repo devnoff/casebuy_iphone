@@ -9,7 +9,7 @@
 #import "CSLoader.h"
 #import "CSImageCache.h"
 
-static CSLoader *instance;
+//static CSLoader *instance;
 
 @implementation CSLoader
 
@@ -67,12 +67,12 @@ static CSLoader *instance;
     if (_scrollView){
         float ratio = image.size.width / image.size.height;
         float w = 320;
-        float h = (w / ratio) + 100;
+        float h = (w / ratio) + 200;
         _scrollView.contentSize = CGSizeMake(w, h);
         
         CGRect rect = _imageView.frame;
         rect.size = _scrollView.contentSize;
-        rect.size.height -= 100;
+        rect.size.height -= 200;
 //        rect.origin.y += 100;
         _imageView.frame = rect;
 
@@ -135,12 +135,12 @@ static CSLoader *instance;
             if (_scrollView){
                 float ratio = image.size.width / image.size.height;
                 float w = 320;
-                float h = (w / ratio) + 100;
+                float h = (w / ratio) + 200;
                 _scrollView.contentSize = CGSizeMake(w, h);
                 
                 CGRect rect = _imageView.frame;
                 rect.size = _scrollView.contentSize;
-                rect.size.height -= 100;
+                rect.size.height -= 200;
 //                rect.origin.y += 100;
                 _imageView.frame = rect;
                 
@@ -159,7 +159,9 @@ static CSLoader *instance;
             progressView.roundedCorners = YES;
             progressView.progressTintColor = [UIColor colorWithRed:0.431 green:0.792 blue:0.992 alpha:1.000];
             progressView.trackTintColor = [UIColor lightGrayColor];
-            progressView.center = imageView.superview.center;
+            CGPoint c = scrollView.superview.center;
+            c.y -= 70;
+            progressView.center = c;
             [imageView.superview addSubview:progressView];
             
             _url = url;

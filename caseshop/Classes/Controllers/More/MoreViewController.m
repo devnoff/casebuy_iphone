@@ -125,9 +125,11 @@
     }
     
     else if (indexPath.row == 4){
+        NSString *loc = [[NSLocale currentLocale] objectForKey:NSLocaleCountryCode];
+        
         CSWebViewController *legal = [[CSWebViewController alloc] initWithNibName:@"CSWebViewController" bundle:nil];
         legal.title = NSLocalizedString(@"COMPANY", nil);
-        legal.startUrl = @"http://m.cultstory.com/about";
+        legal.startUrl = [NSString stringWithFormat:@"http://casebuy.me/ko/index.php/main/companyMobileURL?countryCode=%@",loc];
         legal.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:legal animated:YES];
     }
@@ -146,7 +148,7 @@
 #pragma mark - MFMailComposeViewControllerDelegate
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
-    [controller dismissModalViewControllerAnimated:YES];
+    [controller dismissViewControllerAnimated:YES completion:nil];
     
     if (error){
         NSLog(@"error: %@", error);

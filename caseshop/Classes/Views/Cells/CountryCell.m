@@ -22,7 +22,7 @@
         rect.origin.x += 15;
         rect.size.width -= 15;
         nameLabel = [[UILabel alloc] initWithFrame:rect];
-        nameLabel.textAlignment = UITextAlignmentLeft;
+        nameLabel.textAlignment = NSTextAlignmentLeft;
         nameLabel.font = [UIFont fontWithName:@"DINPro-Bold" size:17];
         nameLabel.textColor = [UIColor colorWithWhite:0.447 alpha:1.000];
         nameLabel.backgroundColor = [UIColor clearColor];

@@ -47,7 +47,7 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
 
         _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 0, 50)];
-        _nameLabel.textAlignment = UITextAlignmentLeft;
+        _nameLabel.textAlignment = NSTextAlignmentLeft;
         _nameLabel.font = [UIFont fontWithName:@"DINPro-Bold" size:17];
         _nameLabel.textColor = [UIColor whiteColor];
         _nameLabel.backgroundColor = [UIColor clearColor];
@@ -56,7 +56,7 @@
         
         
         _descLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 0, 50)];
-        _descLabel.textAlignment = UITextAlignmentLeft;
+        _descLabel.textAlignment = NSTextAlignmentLeft;
         _descLabel.font = [UIFont fontWithName:@"DINPro-Bold" size:17];
         _descLabel.textColor = [UIColor colorWithWhite:0.447 alpha:1.000];
         _descLabel.backgroundColor = [UIColor clearColor];
@@ -64,7 +64,7 @@
         [self addSubview:_descLabel];
         
         _feeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 310, 50)];
-        _feeLabel.textAlignment = UITextAlignmentRight;
+        _feeLabel.textAlignment = NSTextAlignmentRight;
         _feeLabel.font = [UIFont fontWithName:@"DINPro-Bold" size:17];
         _feeLabel.textColor = [UIColor whiteColor];
         _feeLabel.backgroundColor = [UIColor clearColor];

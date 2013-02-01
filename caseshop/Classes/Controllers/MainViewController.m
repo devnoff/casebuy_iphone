@@ -130,7 +130,7 @@
     [_badge setBackgroundImage:bg forState:UIControlStateNormal];
     [_badge setBackgroundImage:bgOn forState:UIControlStateSelected];
     [_badge setTitle:@"0" forState:UIControlStateNormal];
-    _badge.titleLabel.textAlignment = UITextAlignmentCenter;
+    _badge.titleLabel.textAlignment = NSTextAlignmentCenter;
     [_badge setTitleColor:[UIColor colorWithWhite:0.447 alpha:1.000] forState:UIControlStateNormal];
     [_badge setTitleColor:[UIColor colorWithRed:0.431 green:0.792 blue:0.992 alpha:1.000] forState:UIControlStateSelected];
     _badge.userInteractionEnabled = NO;

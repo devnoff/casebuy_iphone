@@ -126,7 +126,7 @@
     table.delegate = self;
     table.weight = self.totalWeight;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:table];
-    [self presentModalViewController:nav animated:YES];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)updateCartItem:(NSString*)itemId qty:(NSString*)qty{
@@ -706,7 +706,7 @@
 
 - (void)shipTableController:(ShipTableController *)controller selectedCountry:(NSString *)countryCode countryName:(NSString *)country fee:(float)fee option:(NSString *)option {
     
-    [controller dismissModalViewControllerAnimated:YES];
+    [controller dismissViewControllerAnimated:YES completion:nil];
     
     // 테이블 뷰 사이즈 조정
     CGRect frame = _tableView.frame;

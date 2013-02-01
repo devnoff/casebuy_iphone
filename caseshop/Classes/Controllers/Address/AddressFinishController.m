@@ -51,11 +51,11 @@
     _resultCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"resultCell"];
     _resultCell.backgroundColor = [UIColor colorWithRed:0.882 green:0.890 blue:0.910 alpha:1.000];
     _resultCell.textLabel.text = self.result;
-    _resultCell.textLabel.minimumFontSize = 12;
+    _resultCell.textLabel.minimumScaleFactor = .5;
     _resultCell.selectionStyle = UITableViewCellSelectionStyleNone;
     _resultCell.textLabel.font = [UIFont systemFontOfSize:15];
     _resultCell.textLabel.textColor = [UIColor colorWithWhite:0.447 alpha:1.000];
-    _resultCell.textLabel.minimumFontSize = 11;
+    _resultCell.textLabel.minimumScaleFactor = .5;
     
 }
 
