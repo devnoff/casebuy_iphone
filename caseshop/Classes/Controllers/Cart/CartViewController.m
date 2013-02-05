@@ -457,7 +457,8 @@
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
     NSArray *liked = [def arrayForKey:kLIKED_ITEMS];
     
-    for (NSNumber *itemId in liked){
+    for (NSDictionary *likedItem in liked){
+        NSNumber *itemId = [likedItem objectForKey:@"id"];
         for (NSDictionary *productInfo in _listData){
             NSDictionary *product = [productInfo objectForKey:@"product"];
             NSNumber *pId = [product objectForKey:@"id"];
