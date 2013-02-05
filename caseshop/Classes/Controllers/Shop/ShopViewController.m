@@ -588,7 +588,7 @@
         NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
         self.categoryId = [def integerForKey:kCURRENT_CATEGORY_ID];
         
-        self.title = [def objectForKey:kCURRENT_CATEGORY_TITLE];
+//        self.title = [def objectForKey:kCURRENT_CATEGORY_TITLE];
         self.navigationController.tabBarItem.title = @"";
         [self getProductCountOfCategory];
         

@@ -133,15 +133,19 @@
     
     if ([(UIButton*)sender tag] == FLAG_ALL){
         shop.flag = @"";
+        shop.title = @"ALL";
     }
     else if ([(UIButton*)sender tag] == FLAG_POP){
         shop.flag = @"pop";
+        shop.title = @"POPULAR";
     }
     else if ([(UIButton*)sender tag] == FLAG_NEW){
         shop.flag = @"new";
+        shop.title = @"NEW";
     }
     else if ([(UIButton*)sender tag] == FLAG_BEST){
         shop.flag = @"hit";
+        shop.title = @"BEST SELLER";
     }
     
     
