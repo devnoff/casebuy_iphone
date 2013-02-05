@@ -137,7 +137,16 @@ static bool _fbReqesting = false;
     NSString *msg = [NSString stringWithFormat:@"%@ %@ %@ %@",_titleLabel.text, _deviceLabel.text, _priceLabel.text, NSLocalizedString(@"I like it!", nil)];
     
     NSString *linkUrl = [NSString stringWithFormat:IS_LOCALE_KO?@"http://casebuy.me/ko/index.php/shop/product?id=%d":@"http://casebuy.me/en/index.php/shop/product?id=%d",self.productId];
-    NSString *thumbUrl = [NSString stringWithFormat:@"%@%@",BASE_URL,[[_images objectAtIndex:_currPage] objectForKey:@"file_path"]];
+    
+    NSString *thumbUrl = nil;
+    
+    NSInteger idx = _currPage;
+    if (![self isDisplayingDescImage]){
+        thumbUrl = [NSString stringWithFormat:@"%@%@",BASE_URL,[[_images objectAtIndex:idx] objectForKey:@"file_path"]];
+    } else {
+        thumbUrl = [NSString stringWithFormat:@"%@%@",BASE_URL,[_descImages objectAtIndex:0]];
+    }
+    
     
     NSMutableDictionary *postParams = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
                                        linkUrl, @"link",
@@ -503,7 +512,7 @@ static bool _fbReqesting = false;
 #pragma mark - Data
 
 - (void)loadDescImage{
-    NSString *imgPath = [_images objectAtIndex:0];
+    NSString *imgPath = [_descImages objectAtIndex:0];
     
     PhotoZoomView *scrollView = [[PhotoZoomView alloc] initWithFrame:_scrollView.frame];
     
@@ -641,6 +650,15 @@ static bool _fbReqesting = false;
                      completion:^(BOOL finished){
                      }];
 }
+        
+- (BOOL)isDisplayingDescImage{
+    NSString *descURL = [_productInfo objectForKey:@"description"];
+    if ((NSNull *)descURL != [NSNull null]){
+        return NO;
+    }
+    
+    return YES;
+}
 
 - (void)loadData{
     API *apiRequest = [[API alloc] init];
@@ -692,9 +710,9 @@ static bool _fbReqesting = false;
                
                NSString *descURL = [product objectForKey:@"description"];
                if ((NSNull *)descURL != [NSNull null]){
-                   _descLabel.text = nil;
-                   [_images removeAllObjects];
-                   [_images addObject:descURL];
+//                   _descLabel.text = nil;
+                   [_descImages removeAllObjects];
+                   [_descImages addObject:descURL];
                    [self loadDescImage];
                    
                } else {
@@ -775,6 +793,7 @@ static bool _fbReqesting = false;
     _wallpapers = [[NSMutableArray alloc] init];
     _productOptions = [[NSMutableArray alloc] init];
     _movingViews = [[NSMutableArray alloc] init];
+    _descImages = [[NSMutableArray alloc] init];
     
     
     CGRect frame = self.navigationController.view.bounds;
@@ -832,6 +851,8 @@ static bool _fbReqesting = false;
 - (void)layoutDescShowing{
     
     if (_descShowing) return;
+    
+    if (_optionShowing) return;
     
     _descShowing = YES;
     

@@ -42,6 +42,8 @@
     
     NSMutableArray *_movingViews;
     
+    NSMutableArray *_descImages;
+    
     // Flags
     BOOL _wallpaperWillOpen;
     BOOL _descShowing;
