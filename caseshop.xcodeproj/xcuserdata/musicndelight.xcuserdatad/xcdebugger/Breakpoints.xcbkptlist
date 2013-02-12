@@ -242,11 +242,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "caseshop/Classes/Controllers/Shop/ProductDetailController.m"
-         timestampString = "381742342.101435"
+         timestampString = "381746388.519095"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "741"
-         endingLineNumber = "741"
+         startingLineNumber = "743"
+         endingLineNumber = "743"
          landmarkName = "-loadData"
          landmarkType = "5">
       </FileBreakpoint>

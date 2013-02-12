@@ -491,6 +491,8 @@ static bool _fbReqesting = false;
             }
             [self hideBlackLoadingMask];
             
+            [self hideProductOptions];
+            
         }
          failureBock:^(NSError *error){
              [self hideBlackLoadingMask];
